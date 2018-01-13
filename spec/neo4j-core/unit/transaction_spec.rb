@@ -11,20 +11,20 @@ describe Neo4j::Transaction do
 
     it { should eq([current_session, true]) }
 
-    let_context args: [true] { it { should eq([current_session, true]) } }
-    let_context args: [false] { it { should eq([current_session, false]) } }
-    let_context args: [:session] { it { should eq([:session, true]) } }
+    let_context(args: [true]) { it { should eq([current_session, true]) } }
+    let_context(args: [false]) { it { should eq([current_session, false]) } }
+    let_context(args: [:session]) { it { should eq([:session, true]) } }
 
     # This method doesn't care what you pass as the non-boolean value
     # so using a symbol here
-    let_context args: [:session] { it { should eq([:session, true]) } }
+    let_context(args: [:session]) { it { should eq([:session, true]) } }
 
 
-    let_context args: [false, :session] { it { should eq([:session, false]) } }
-    let_context args: [true, :session] { it { should eq([:session, true]) } }
+    let_context(args: [false, :session]) { it { should eq([:session, false]) } }
+    let_context(args: [true, :session]) { it { should eq([:session, true]) } }
 
-    let_context args: [:session, false] { it { should eq([:session, false]) } }
-    let_context args: [:session, true] { it { should eq([:session, true]) } }
+    let_context(args: [:session, false]) { it { should eq([:session, false]) } }
+    let_context(args: [:session, true]) { it { should eq([:session, true]) } }
 
     let_context args: [:session, true, :foo] do
       it { expect { subject }.to raise_error ArgumentError, /Too many arguments/ }
