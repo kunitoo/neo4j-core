@@ -6,7 +6,7 @@ module Neo4j
       end
 
       def constraint?(label_name, property, session = Neo4j::Session.current)
-        label_constraints = session.connection.get("#{CONSTRAINT_PATH}/#{label_name}").body
+        label_constraints = session.connection.get("#{CONSTRAINT_PATH}#{label_name}").body
         !label_constraints.select { |c| c[:label] == label_name.to_s && c[:property_keys].first == property.to_s }.empty?
       end
 
@@ -15,7 +15,7 @@ module Neo4j
       end
 
       def index?(label_name, property, session = Neo4j::Session.current)
-        label_indexes = session.connection.get("#{INDEX_PATH}/#{label_name}").body
+        label_indexes = session.connection.get("#{INDEX_PATH}#{label_name}").body
         !label_indexes.select { |i| i[:label] == label_name.to_s && i[:property_keys].first == property.to_s }.empty?
       end
 
